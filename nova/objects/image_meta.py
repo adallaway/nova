@@ -529,6 +529,9 @@ class ImageMetaProps(base.NovaObject):
         # for trait in image_meta.traits_required:
         # will yield trait strings such as 'HW_CPU_X86_AVX2'
         'traits_required': fields.ListOfStringsField(),
+
+        # The optional model of sound driver to emulate
+        'sound_driver_model': fields.StringField(),
     }
 
     # The keys are the legacy property names and

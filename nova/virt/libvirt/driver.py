@@ -6130,6 +6130,7 @@ class LibvirtDriver(driver.ComputeDriver):
             self._guest_add_pcie_root_ports(guest)
 
         self._guest_add_pci_devices(guest, instance)
+        self._guest_add_sound_device(guest, image_meta)
 
         pci_arq_list = []
         if accel_info:
@@ -6335,6 +6336,13 @@ class LibvirtDriver(driver.ComputeDriver):
             #  'xen', 'qemu' and 'kvm'.
             if pci_manager.get_instance_pci_devs(instance, 'all'):
                 raise exception.PciDeviceUnsupportedHypervisor(type=virt_type)
+
+    @staticmethod
+    def _guest_add_sound_device(guest, image_meta):
+        if image_meta.properties.get('sound_driver_model'):
+            dev = vconfig.LibvirtConfigGuestSound()
+            dev.model = image_meta.properties.sound_driver_model
+            guest.add_device(dev)
 
     def _guest_add_accel_pci_devices(self, guest, accel_info):
         """Add all accelerator PCI functions from ARQ list."""
