@@ -122,6 +122,7 @@ class ImageMetaPropsPayload(base.NotificationPayloadBase):
     # Version 1.3: Added hw_mem_encryption, hw_pmu and hw_time_hpet fields
     # Version 1.4: Added 'mixed' to hw_cpu_policy field
     # Version 1.5: Added 'hw_tpm_model' and 'hw_tpm_version' fields
+    # Version 1.5: Added 'sound_driver_model', 'hw_video_vgamem' and 'hw_video_heads' fields
     VERSION = '1.5'
 
     SCHEMA = {

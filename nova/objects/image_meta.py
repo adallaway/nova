@@ -176,14 +176,19 @@ class ImageMetaProps(base.NovaObject):
     # Version 1.25: Added 'hw_pci_numa_affinity_policy' field
     # Version 1.26: Added 'mixed' to 'hw_cpu_policy' field
     # Version 1.27: Added 'hw_tpm_model' and 'hw_tpm_version' fields
+    # Version 1.28: Added 'sound_driver_model', 'hw_video_vgamem' and 'hw_video_heads' fields
     # NOTE(efried): When bumping this version, the version of
     # ImageMetaPropsPayload must also be bumped. See its docstring for details.
-    VERSION = '1.27'
+    VERSION = '1.28'
 
     def obj_make_compatible(self, primitive, target_version):
         super(ImageMetaProps, self).obj_make_compatible(primitive,
                                                         target_version)
         target_version = versionutils.convert_version_to_tuple(target_version)
+        if target_version < (1, 28):
+            primitive.pop('sound_driver_model', None)
+            primitive.pop('hw_video_vgamem', None)
+            primitive.pop('hw_video_heads', None)
         if target_version < (1, 27):
             primitive.pop('hw_tpm_model', None)
             primitive.pop('hw_tpm_version', None)
@@ -387,11 +392,17 @@ class ImageMetaProps(base.NovaObject):
         # name of the SCSI bus controller eg 'virtio-scsi', 'lsilogic', etc
         'hw_scsi_model': fields.SCSIModelField(),
 
+        # number of video heads to create
+        'hw_video_heads': fields.IntegerField(),
+
         # name of the video adapter model to use, eg cirrus, vga, xen, qxl
         'hw_video_model': fields.VideoModelField(),
 
         # MB of video RAM to provide eg 64
         'hw_video_ram': fields.IntegerField(),
+
+        # MB for VGA framebuffer to provide eg 32
+        'hw_video_vgamem': fields.IntegerField(),
 
         # name of a NIC device model eg virtio, e1000, rtl8139
         'hw_vif_model': fields.VIFModelField(),
