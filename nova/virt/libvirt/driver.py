@@ -5474,6 +5474,11 @@ class LibvirtDriver(driver.ComputeDriver):
         if max_vram and video_ram:
             video.vram = video_ram * units.Mi // units.Ki
 
+        # Set video memory
+        video_vgamem = int(image_meta.properties.get('hw_video_vgamem'))
+        if video_vgamem:
+            video.vgamem = video_vgamem * units.Mi // units.Ki
+
         # Set video heads
         video_heads = image_meta.properties.get('hw_video_heads')
         if video_heads:

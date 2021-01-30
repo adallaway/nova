@@ -2009,6 +2009,7 @@ class LibvirtConfigGuestVideo(LibvirtConfigGuestDevice):
 
         self.type = 'cirrus'
         self.vram = None
+        self.vgamem = None
         self.heads = None
         self.driver_iommu = False
 
@@ -2024,6 +2025,9 @@ class LibvirtConfigGuestVideo(LibvirtConfigGuestDevice):
 
         if self.vram:
             model.set("vram", str(self.vram))
+
+        if self.vgamem:
+            model.set("vgamem", str(self.vgamem))
 
         if self.heads:
             model.set("heads", str(self.heads))
