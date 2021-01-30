@@ -5473,6 +5473,12 @@ class LibvirtDriver(driver.ComputeDriver):
                                                  max_vram=max_vram)
         if max_vram and video_ram:
             video.vram = video_ram * units.Mi // units.Ki
+
+        # Set video heads
+        video_heads = image_meta.properties.get('hw_video_heads')
+        if video_heads:
+            video.heads = int(video_heads)
+
         guest.add_device(video)
 
         # NOTE(sean-k-mooney): return the video device we added
