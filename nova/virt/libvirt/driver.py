@@ -5475,7 +5475,7 @@ class LibvirtDriver(driver.ComputeDriver):
             video.vram = video_ram * units.Mi // units.Ki
 
         # Set video memory
-        video_vgamem = int(image_meta.properties.get('hw_video_vgamem'))
+        video_vgamem = int(image_meta.properties.get('hw_video_vgamem', 0))
         if video_vgamem:
             video.vgamem = video_vgamem * units.Mi // units.Ki
 
