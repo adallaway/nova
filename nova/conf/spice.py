@@ -142,6 +142,17 @@ Related options:
   The proxy client must be able to access the address specified in
   ``server_listen`` using the value of this option.
 """),
+    cfg.StrOpt('server_default_channel_security_policy',
+        default='any',
+        help="""
+The default Spice channel security policy.
+
+Possible values:
+
+* secure
+* insecure
+* any
+"""),
 ]
 
 ALL_OPTS.extend(CLI_OPTS)

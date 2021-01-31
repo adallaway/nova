@@ -6384,6 +6384,7 @@ class LibvirtDriver(driver.ComputeDriver):
             graphics = vconfig.LibvirtConfigGuestGraphics()
             graphics.type = "spice"
             graphics.listen = CONF.spice.server_listen
+            graphics.defaultMode = CONF.spice.server_default_channel_security_policy
             guest.add_device(graphics)
             add_video_driver = True
         return add_video_driver
