@@ -84,6 +84,4 @@ def proxy(host, port, security_proxy=None):
         file_only=True,
         RequestHandlerClass=websocketproxy.NovaProxyRequestHandler,
         security_proxy=security_proxy,
-        logger=logging.getLogger(__name__),
-        verbose=True,
     ).start_server()
