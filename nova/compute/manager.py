@@ -6766,7 +6766,7 @@ class ComputeManager(manager.Manager):
                 context=context,
                 console_type=console_type,
                 host=console.host,
-                port=console.port,
+                port=console.port or console.tlsPort,
                 internal_access_path=console.internal_access_path,
                 instance_uuid=instance.uuid,
                 access_url_base=CONF.spice.html5proxy_base_url,
